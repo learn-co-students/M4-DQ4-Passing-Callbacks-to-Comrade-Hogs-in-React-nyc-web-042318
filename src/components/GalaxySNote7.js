@@ -1,8 +1,7 @@
-import React from "react"
+import React from "react";
 import wreee from '../assets/wreee.mp3';
 import exclaim from '../assets/exclaim.mp3';
-import exclamation from "../assets/exclamation.png"
-
+import exclamation from "../assets/exclamation.png";
 
 export default class GalaxySNote7 extends React.Component {
   constructor(props) {
@@ -19,15 +18,21 @@ export default class GalaxySNote7 extends React.Component {
   }
 
   throwAFit = () => {
+    this.props.alterEnvironment('inhospitable')
   }
 
   relax = () => {
+    this.setState({panicked: false})
+    this.props.alterEnvironment('docile')
   }
 
   exclaim = () => {
     if (this.state.panicked) return
     this.exclaimAudio.play()
     this.squeelAudio.play()
+    setTimeout(this.throwAFit, 2000)
+    this.setState({panicked: true})
+    setTimeout(this.relax, 3000)
   }
 
   panic = () => (<img id="galaxy-exclamation" className="exclamation" src={exclamation} alt="" />)
@@ -39,4 +44,5 @@ export default class GalaxySNote7 extends React.Component {
       </div>
     )
   }
+
 }
